@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>兄弟多个1</li>
+			<li>兄弟多个2</li>
+			<li>兄弟多个3</li>
+			<li>兄弟多个4</li>
+			<li>兄弟多个5</li>
+			<li>兄弟多个6</li>
+			<li>兄弟多个7</li>
+		</ul>
+	</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script>
+	//第一种定义方式
+	/*$.extend({  //调用时  使用$.方法名() 调用
+		fnAdd : function(arr){
+			return eval( arr.join("+") );  
+		},
+		fnSay : function(){
+			alert( "hello" );
+		}
+	});*/
+	/*var res = $.fnAdd( [1,2,3,4,5] );
+	alert( res )*/
+	//$.fnSay();
+	
+	//第二种定义方案
+	/*$.fn.extend({ //调用时 ： 使用jq的选择器调用   选择器.方法名()
+		fnAdd : function(arr){
+			return eval( arr.join("+") );  
+		},
+		fnSay : function(){
+			alert( "hello" );
+		}
+	})*/
+	/*var res = $("body").fnAdd( [1,2,3,4,5] );
+	alert( res )*/
+	
+	
+/*	$.extend( {
+		fnOver : function($list){
+			$list.mouseover(function(){
+				$(this).css( "background-color","pink" );
+			})
+			return this;
+		},
+		fnOut : function($list){
+			$list.mouseout(function(){
+				$(this).css( "background-color","" );
+			})
+		}
+	} )
+	$.fnOver( $("li") ).fnOut( $("li") );*/
+	
+	$.fn.extend({
+		fnOver : function(){
+			this.mouseenter(function(){
+				$(this).css( "background-color","pink" );
+			})
+			return this;
+		},
+		fnOut : function(){
+			//this指向方法的调用者  
+			this.mouseleave(function(){
+				//指向dom元素  当前操作的dom元素
+				$(this).css( "background-color","" );
+			})
+		}
+	})
+	$("li").fnOver().fnOut();
+</script>
